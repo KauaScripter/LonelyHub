@@ -1,0 +1,77 @@
+if game.PlaceId == 3486025575 then
+
+    --Load
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+    
+    --Main
+    local Window = OrionLib:MakeWindow({Name = "Kaua Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Kaua"})
+
+
+    --Valor 
+    _G.Collect = true
+    
+    --Function
+    function Collect()
+    while _G.Collect == true do
+local args = {
+    [1] = "1",
+    [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild()
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("MagnetEvents"):WaitForChild("requestGrab"):FireServer(unpack(args))
+    wait(0.0001)
+    end
+end
+    --Player
+    local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Section = PlayerTab:AddSection({
+	Name = "Auto-Collect"
+})
+
+PlayerTab:AddToggle({
+	Name = "Collect",
+	Default = false,
+	Callback = function(Value)
+		_G.Collect = Value
+		Collect()
+	end    
+})
+
+    --Eggs
+    
+    --Valor
+    _G.Egg1 = true
+    
+    --Function
+    function Egg1()
+    while _G.Egg1 == true do
+    local args = {
+    [1] = "Common Egg"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("PetEvents"):WaitForChild("requesthatch"):FireServer(unpack(args))
+    wait(0)
+    end
+end
+
+local EggsTab = Window:MakeTab({
+	Name = "Eggs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = EggsTab:AddSection({
+	Name = "Open-Eggs"
+})
+
+EggsTab:AddButton({
+	Name = "Egg 1",
+	Callback = function(Value)
+      		_G.Egg1 = Value
+  	end    
+})
+end
